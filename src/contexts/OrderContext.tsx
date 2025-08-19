@@ -76,7 +76,11 @@ export const OrderProvider: React.FC<{ children: ReactNode }> = ({ children }) =
 
   const getTotalPrice = () => {
     if (!state.selectedProduct || !state.selectedDesign) return 0;
-    return (state.selectedProduct.price + state.selectedDesign.price) * state.quantity;
+    const basePrice = state.selectedProduct.price;
+    const designPrice = state.selectedDesign.price;
+    const totalPerItem = basePrice + designPrice;
+    const finalTotal = totalPerItem * state.quantity;
+    return Math.round(finalTotal * 100) / 100; // Round to 2 decimal places
   };
 
   const canProceedToNextStep = () => {

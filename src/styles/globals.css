@@ -240,14 +240,46 @@ html {
 /* Mobile responsive adjustments */
 @media (max-width: 768px) {
   .heading-primary {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
   
   .heading-secondary {
-    font-size: 2rem;
+    font-size: 1.75rem;
   }
   
   .text-large {
     font-size: 1.1rem;
+  }
+  
+  /* Mobile-specific improvements */
+  .glass-card {
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+  }
+  
+  /* Better mobile touch targets */
+  button, a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Improved mobile spacing */
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .heading-primary {
+    font-size: 1.75rem;
+  }
+  
+  .heading-secondary {
+    font-size: 1.5rem;
+  }
+  
+  .text-large {
+    font-size: 1rem;
   }
 }
