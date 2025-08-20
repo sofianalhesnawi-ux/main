@@ -80,7 +80,7 @@ export const OrderProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     const designPrice = state.selectedDesign.price;
     const totalPerItem = basePrice + designPrice;
     const finalTotal = totalPerItem * state.quantity;
-    return Math.round(finalTotal * 100) / 100; // Round to 2 decimal places
+    return Number(finalTotal.toFixed(2)); // Ensure proper decimal formatting
   };
 
   const canProceedToNextStep = () => {

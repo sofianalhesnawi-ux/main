@@ -28,7 +28,7 @@ const Hero: React.FC = () => {
             </p>
             <button
               onClick={scrollToFeatured}
-              className="btn-enhanced inline-flex items-center gap-3 bg-white text-[var(--text-dark)] px-6 sm:px-8 py-3 sm:py-4 font-medium uppercase tracking-wider text-xs sm:text-sm rounded-xl border-2 border-white relative overflow-hidden group"
+              className="btn-enhanced inline-flex items-center gap-3 bg-white text-[var(--text-dark)] px-6 sm:px-8 py-3 sm:py-4 font-medium uppercase tracking-wider text-xs sm:text-sm rounded-xl border-2 border-white relative overflow-hidden group shadow-lg hover:shadow-xl transition-all duration-300"
             >
               <span className="relative z-10">
               اكتشف المجموعة

@@ -32,7 +32,7 @@ const Header: React.FC = () => {
         <nav className="relative">
           {/* Mobile Menu Toggle */}
           <button
-            className="md:hidden absolute top-4 left-4 z-50 text-white hover:text-[var(--accent-color)] transition-all duration-300 hover:scale-110 hover:rotate-90 p-2 rounded-lg bg-black/20 backdrop-blur-sm"
+            className="md:hidden absolute top-3 left-4 z-50 text-white hover:text-[var(--accent-color)] transition-all duration-300 hover:scale-110 hover:rotate-90 p-3 rounded-xl bg-black/30 backdrop-blur-md border border-white/10"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -41,13 +41,13 @@ const Header: React.FC = () => {
           {/* Navigation Links */}
           <ul className={`${
             isMenuOpen 
-              ? 'flex flex-col items-center py-6 gap-4 bg-black/80 backdrop-blur-xl rounded-2xl mt-2 animate-fade-in-up mx-4' 
+              ? 'flex flex-col items-center py-8 gap-6 bg-black/90 backdrop-blur-xl rounded-2xl mt-2 animate-fade-in-up mx-4 border border-white/10' 
               : 'hidden'
             } md:flex md:justify-between md:items-center md:py-3 md:px-8 md:bg-transparent md:backdrop-blur-none md:mx-0`}>
             <li>
               <button
                 onClick={() => scrollToSection('hero')}
-                className="text-white hover:text-[var(--accent-color)] transition-all duration-300 font-medium text-sm md:text-xs uppercase tracking-wider px-4 py-3 md:py-2 rounded-lg relative group hover:scale-110 hover:-translate-y-1 w-full md:w-auto text-center"
+                className="text-white hover:text-[var(--accent-color)] transition-all duration-300 font-medium text-base md:text-xs uppercase tracking-wider px-6 py-4 md:py-2 rounded-xl relative group hover:scale-110 hover:-translate-y-1 w-full md:w-auto text-center min-h-[48px] md:min-h-auto flex items-center justify-center"
               >
                 الرئيسية
                 <span className="absolute bottom-0 right-0 w-0 h-0.5 bg-[var(--accent-color)] transition-all duration-500 group-hover:w-full group-hover:shadow-[0_0_10px_var(--accent-color)]"></span>
@@ -56,7 +56,7 @@ const Header: React.FC = () => {
             <li>
               <button
                 onClick={() => scrollToSection('featured')}
-                className="text-white hover:text-[var(--accent-color)] transition-all duration-300 font-medium text-sm md:text-xs uppercase tracking-wider px-4 py-3 md:py-2 rounded-lg relative group hover:scale-110 hover:-translate-y-1 w-full md:w-auto text-center"
+                className="text-white hover:text-[var(--accent-color)] transition-all duration-300 font-medium text-base md:text-xs uppercase tracking-wider px-6 py-4 md:py-2 rounded-xl relative group hover:scale-110 hover:-translate-y-1 w-full md:w-auto text-center min-h-[48px] md:min-h-auto flex items-center justify-center"
               >
                 منتجاتنا
                 <span className="absolute bottom-0 right-0 w-0 h-0.5 bg-[var(--accent-color)] transition-all duration-500 group-hover:w-full group-hover:shadow-[0_0_10px_var(--accent-color)]"></span>
@@ -65,7 +65,7 @@ const Header: React.FC = () => {
             <li>
               <button
                 onClick={() => scrollToSection('hero')}
-                className="font-['Playfair_Display'] text-3xl md:text-2xl font-bold text-white tracking-[2px] text-center hover:text-[var(--accent-color)] transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_10px_rgba(0,255,0,0.8)] py-2"
+                className="font-['Playfair_Display'] text-4xl md:text-2xl font-bold text-white tracking-[2px] text-center hover:text-[var(--accent-color)] transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_10px_rgba(0,255,0,0.8)] py-4 md:py-2"
               >
                 Libero
               </button>
@@ -73,7 +73,7 @@ const Header: React.FC = () => {
             <li>
               <button
                 onClick={() => scrollToSection('about')}
-                className="text-white hover:text-[var(--accent-color)] transition-all duration-300 font-medium text-sm md:text-xs uppercase tracking-wider px-4 py-3 md:py-2 rounded-lg relative group hover:scale-110 hover:-translate-y-1 w-full md:w-auto text-center"
+                className="text-white hover:text-[var(--accent-color)] transition-all duration-300 font-medium text-base md:text-xs uppercase tracking-wider px-6 py-4 md:py-2 rounded-xl relative group hover:scale-110 hover:-translate-y-1 w-full md:w-auto text-center min-h-[48px] md:min-h-auto flex items-center justify-center"
               >
                 من نحن
                 <span className="absolute bottom-0 right-0 w-0 h-0.5 bg-[var(--accent-color)] transition-all duration-500 group-hover:w-full group-hover:shadow-[0_0_10px_var(--accent-color)]"></span>
@@ -82,7 +82,7 @@ const Header: React.FC = () => {
             <li>
               <button
                 onClick={() => scrollToSection('contact')}
-                className="text-white hover:text-[var(--accent-color)] transition-all duration-300 font-medium text-sm md:text-xs uppercase tracking-wider px-4 py-3 md:py-2 rounded-lg relative group hover:scale-110 hover:-translate-y-1 w-full md:w-auto text-center"
+                className="text-white hover:text-[var(--accent-color)] transition-all duration-300 font-medium text-base md:text-xs uppercase tracking-wider px-6 py-4 md:py-2 rounded-xl relative group hover:scale-110 hover:-translate-y-1 w-full md:w-auto text-center min-h-[48px] md:min-h-auto flex items-center justify-center"
               >
                 اتصل بنا
                 <span className="absolute bottom-0 right-0 w-0 h-0.5 bg-[var(--accent-color)] transition-all duration-500 group-hover:w-full group-hover:shadow-[0_0_10px_var(--accent-color)]"></span>

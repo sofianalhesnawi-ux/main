@@ -240,6 +240,56 @@ html {
 /* Mobile responsive adjustments */
 @media (max-width: 768px) {
   .heading-primary {
+    font-size: 2.25rem;
+  }
+  
+  .heading-secondary {
+    font-size: 2rem;
+  }
+  
+  .text-large {
+    font-size: 1.125rem;
+  }
+  
+  /* Mobile-specific improvements */
+  .glass-card {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+  
+  /* Better mobile touch targets */
+  button, a {
+    min-height: 48px;
+    min-width: 48px;
+  }
+  
+  /* Improved mobile spacing */
+  .container {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+  
+  /* Enhanced mobile navigation */
+  .glass-nav {
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  /* Better mobile footer layout */
+  .grid {
+    gap: 1.5rem;
+  }
+  
+  /* Improved mobile text readability */
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+  }
+}
+
+@media (max-width: 480px) {
+  .heading-primary {
     font-size: 2rem;
   }
   
@@ -248,38 +298,24 @@ html {
   }
   
   .text-large {
-    font-size: 1.1rem;
+    font-size: 1.125rem;
   }
   
-  /* Mobile-specific improvements */
-  .glass-card {
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-  }
-  
-  /* Better mobile touch targets */
-  button, a {
-    min-height: 44px;
-    min-width: 44px;
-  }
-  
-  /* Improved mobile spacing */
+  /* Extra small mobile improvements */
   .container {
     padding-left: 1rem;
     padding-right: 1rem;
   }
-}
-
-@media (max-width: 480px) {
-  .heading-primary {
-    font-size: 1.75rem;
+  
+  /* Better button sizing for small screens */
+  button, a {
+    min-height: 44px;
+    padding: 0.75rem 1rem;
   }
   
-  .heading-secondary {
-    font-size: 1.5rem;
-  }
-  
-  .text-large {
-    font-size: 1rem;
+  /* Improved spacing for very small screens */
+  .glass-card {
+    padding: 1.25rem;
+    margin: 0.75rem;
   }
 }
