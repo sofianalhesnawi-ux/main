@@ -79,8 +79,7 @@ export const OrderProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     const basePrice = state.selectedProduct.price;
     const designPrice = state.selectedDesign.price;
     const totalPerItem = basePrice + designPrice;
-    const finalTotal = totalPerItem * state.quantity;
-    return Number(finalTotal.toFixed(2)); // Ensure proper decimal formatting
+    return totalPerItem * state.quantity;
   };
 
   const canProceedToNextStep = () => {

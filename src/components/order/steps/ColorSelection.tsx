@@ -50,6 +50,19 @@ const ColorSelection: React.FC = () => {
         ))}
       </div>
     </div>
+
+    {/* Next Button */}
+    <div className="flex justify-center mt-8">
+      <motion.button
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        onClick={nextStep}
+        disabled={!state.selectedColor}
+        className="btn-enhanced bg-[var(--accent-color)] text-black px-8 py-3 rounded-xl font-bold hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        التالي
+      </motion.button>
+    </div>
   );
 };
 

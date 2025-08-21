@@ -64,13 +64,26 @@ const DesignSelection: React.FC = () => {
         ))}
       </div>
 
-      <button
-        onClick={prevStep}
-        className="flex items-center gap-2 text-[var(--text-light)] hover:text-white transition-colors duration-300 mx-auto"
-      >
-        <ArrowRight size={16} />
-        العودة للخطوة السابقة
-      </button>
+      {/* Navigation Buttons */}
+      <div className="flex justify-between items-center">
+        <button
+          onClick={prevStep}
+          className="flex items-center gap-2 text-[var(--text-light)] hover:text-white transition-colors duration-300"
+        >
+          <ArrowRight size={16} />
+          العودة للخطوة السابقة
+        </button>
+
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={nextStep}
+          disabled={!state.selectedDesign}
+          className="btn-enhanced bg-[var(--accent-color)] text-black px-8 py-3 rounded-xl font-bold hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          التالي
+        </motion.button>
+      </div>
     </div>
   );
 };
