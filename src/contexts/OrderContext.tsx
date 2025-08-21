@@ -7,6 +7,7 @@ interface OrderState {
   selectedColor: Color | null;
   selectedSize: Size | null;
   selectedDesign: Design | null;
+  customDesignImage: string | null;
   quantity: number;
   customer: Customer | null;
   isOrderComplete: boolean;
@@ -18,6 +19,7 @@ type OrderAction =
   | { type: 'SET_COLOR'; payload: Color }
   | { type: 'SET_SIZE'; payload: Size }
   | { type: 'SET_DESIGN'; payload: Design }
+  | { type: 'SET_CUSTOM_DESIGN_IMAGE'; payload: string }
   | { type: 'SET_QUANTITY'; payload: number }
   | { type: 'SET_CUSTOMER'; payload: Customer }
   | { type: 'COMPLETE_ORDER' }
@@ -29,6 +31,7 @@ const initialState: OrderState = {
   selectedColor: null,
   selectedSize: null,
   selectedDesign: null,
+  customDesignImage: null,
   quantity: 1,
   customer: null,
   isOrderComplete: false,
@@ -46,6 +49,8 @@ const orderReducer = (state: OrderState, action: OrderAction): OrderState => {
       return { ...state, selectedSize: action.payload };
     case 'SET_DESIGN':
       return { ...state, selectedDesign: action.payload };
+    case 'SET_CUSTOM_DESIGN_IMAGE':
+      return { ...state, customDesignImage: action.payload };
     case 'SET_QUANTITY':
       return { ...state, quantity: action.payload };
     case 'SET_CUSTOMER':
@@ -75,11 +80,14 @@ export const OrderProvider: React.FC<{ children: ReactNode }> = ({ children }) =
   const [state, dispatch] = useReducer(orderReducer, initialState);
 
   const getTotalPrice = () => {
-    if (!state.selectedProduct || !state.selectedDesign) return 0;
-    const basePrice = state.selectedProduct.price;
-    const designPrice = state.selectedDesign.price;
+    if (!state.selectedProduct) return 0;
+    
+    const basePrice = state.selectedProduct.price || 0;
+    const designPrice = state.selectedDesign ? state.selectedDesign.price : 0;
     const totalPerItem = basePrice + designPrice;
-    return totalPerItem * state.quantity;
+    const total = totalPerItem * state.quantity;
+    
+    return Math.round(total * 100) / 100;
   };
 
   const canProceedToNextStep = () => {

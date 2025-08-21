@@ -171,7 +171,7 @@ const OrderConfirmation: React.FC<OrderConfirmationProps> = ({ onClose }) => {
           <hr className="border-white/20" />
           
           <div className="flex justify-between items-center text-lg font-bold">
-            <span className="text-[var(--accent-color)]">{getTotalPrice() || 0} دينار ليبي</span>
+            <span className="text-[var(--accent-color)]">{getTotalPrice()?.toFixed(2) || '0.00'} دينار ليبي</span>
             <span className="text-white">المجموع</span>
           </div>
         </div>
@@ -200,6 +200,18 @@ const OrderConfirmation: React.FC<OrderConfirmationProps> = ({ onClose }) => {
             </div>
           )}
         </div>
+        
+        {/* Custom Design Image */}
+        {state.customDesignImage && (
+          <div className="mt-4 text-center">
+            <h5 className="text-md font-medium text-white mb-2">التصميم المخصص</h5>
+            <img
+              src={state.customDesignImage}
+              alt="التصميم المخصص"
+              className="w-24 h-24 object-cover rounded-lg mx-auto border border-white/20"
+            />
+          </div>
+        )}
       </div>
 
       {/* Navigation Buttons */}

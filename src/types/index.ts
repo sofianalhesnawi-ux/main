@@ -27,6 +27,7 @@ export interface Design {
   name: string;
   type: 'embroidered' | 'plain' | 'custom';
   price: number;
+  customImage?: string;
 }
 
 export interface OrderItem {

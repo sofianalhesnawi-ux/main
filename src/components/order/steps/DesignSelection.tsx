@@ -1,15 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Check, ArrowRight, Sparkles, Minus, Plus } from 'lucide-react';
+import { Check, ArrowRight, Sparkles, Minus, Plus, Upload, Image } from 'lucide-react';
 import { useOrder } from '../../../contexts/OrderContext';
 import { designs } from '../../../data/mockData';
 
 const DesignSelection: React.FC = () => {
   const { state, dispatch, nextStep, prevStep } = useOrder();
+  const [showCustomUpload, setShowCustomUpload] = useState(false);
+  const [uploadedImage, setUploadedImage] = useState<string | null>(null);
 
   const handleDesignSelect = (design: typeof designs[0]) => {
     dispatch({ type: 'SET_DESIGN', payload: design });
-    setTimeout(nextStep, 300);
+    
+    if (design.type === 'custom') {
+      setShowCustomUpload(true);
+    } else {
+      setTimeout(nextStep, 300);
+    }
+  };
+
+  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const imageUrl = e.target?.result as string;
+        setUploadedImage(imageUrl);
+        dispatch({ type: 'SET_CUSTOM_DESIGN_IMAGE', payload: imageUrl });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleCustomDesignNext = () => {
+    if (uploadedImage) {
+      nextStep();
+    }
   };
 
   const getDesignIcon = (type: string) => {
@@ -63,6 +89,61 @@ const DesignSelection: React.FC = () => {
           </motion.button>
         ))}
       </div>
+      {/* Custom Design Upload */}
+      {showCustomUpload && state.selectedDesign?.type === 'custom' && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mt-8 p-6 glass-card rounded-2xl"
+        >
+          <div className="text-center mb-4">
+            <p className="text-[var(--accent-color)] font-medium mb-2">
+              الرجاء ارفاق التصميم المخصص ليك
+            </p>
+          </div>
+          
+          <div className="relative">
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageUpload}
+              className="hidden"
+              id="custom-design-upload"
+            />
+            <label
+              htmlFor="custom-design-upload"
+              className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-white/30 rounded-xl cursor-pointer hover:border-[var(--accent-color)] transition-colors duration-300"
+            >
+              {uploadedImage ? (
+                <div className="flex items-center gap-2 text-[var(--accent-color)]">
+                  <Image size={24} />
+                  <span>تم رفع الصورة بنجاح</span>
+                </div>
+              ) : (
+                <div className="flex flex-col items-center gap-2 text-white/60">
+                  <Upload size={32} />
+                  <span>اضغط لرفع صورة التصميم</span>
+                  <span className="text-xs">صورة واحدة فقط</span>
+                </div>
+              )}
+            </label>
+          </div>
+
+          {uploadedImage && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="mt-4 text-center"
+            >
+              <img
+                src={uploadedImage}
+                alt="التصميم المخصص"
+                className="w-20 h-20 object-cover rounded-lg mx-auto border border-white/20"
+              />
+            </motion.div>
+          )}
+        </motion.div>
+      )}
 
       {/* Navigation Buttons */}
       <div className="flex justify-between items-center">
@@ -77,8 +158,8 @@ const DesignSelection: React.FC = () => {
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          onClick={nextStep}
-          disabled={!state.selectedDesign}
+          onClick={showCustomUpload ? handleCustomDesignNext : nextStep}
+          disabled={!state.selectedDesign || (showCustomUpload && !uploadedImage)}
           className="btn-enhanced bg-[var(--accent-color)] text-black px-8 py-3 rounded-xl font-bold hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
         >
           التالي

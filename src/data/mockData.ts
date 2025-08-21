@@ -54,7 +54,7 @@ export const sizes: Size[] = [
 ];
 
 export const designs: Design[] = [
-  { id: '1', name: 'مطرز', type: 'embroidered', price: 25 },
+  { id: '1', name: 'تصميم جاهز', type: 'embroidered', price: 25 },
   { id: '2', name: 'سادة', type: 'plain', price: 0 },
   { id: '3', name: 'تصميم مخصص', type: 'custom', price: 50 },
 ];
