@@ -171,7 +171,7 @@ const OrderConfirmation: React.FC<OrderConfirmationProps> = ({ onClose }) => {
           <hr className="border-white/20" />
           
           <div className="flex justify-between items-center text-lg font-bold">
-            <span className="text-[var(--accent-color)]">{getTotalPrice() || 0} دينار ليبي</span>
+            <span className="text-[var(--accent-color)]">{getTotalPrice()} دينار ليبي</span>
             <span className="text-white">المجموع</span>
           </div>
         </div>

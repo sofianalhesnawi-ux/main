@@ -80,27 +80,30 @@ export const OrderProvider: React.FC<{ children: ReactNode }> = ({ children }) =
   const [state, dispatch] = useReducer(orderReducer, initialState);
 
   const getTotalPrice = () => {
-    if (!state.selectedProduct || !state.selectedProduct.price) {
-      console.log('No product selected or price missing');
+    if (!state.selectedProduct) {
+      console.log('No product selected');
       return 0;
     }
     
-    const basePrice = Number(state.selectedProduct.price) || 0;
-    const designPrice = state.selectedDesign ? (Number(state.selectedDesign.price) || 0) : 0;
-    const quantity = Number(state.quantity) || 1;
+    // تأكد من أن السعر الأساسي موجود
+    const basePrice = state.selectedProduct.price || 0;
+    console.log('Base price from product:', basePrice);
     
+    // احسب سعر التصميم
+    const designPrice = state.selectedDesign?.price || 0;
+    console.log('Design price:', designPrice);
+    
+    // احسب الكمية
+    const quantity = state.quantity || 1;
+    console.log('Quantity:', quantity);
+    
+    // احسب المجموع
     const totalPerItem = basePrice + designPrice;
     const total = totalPerItem * quantity;
     
-    console.log('Price calculation:', {
-      basePrice,
-      designPrice,
-      quantity,
-      totalPerItem,
-      total
-    });
+    console.log('Final calculation:', { basePrice, designPrice, quantity, totalPerItem, total });
     
-    return Number(total.toFixed(2));
+    return Math.round(total * 100) / 100; // تقريب إلى منزلتين عشريتين
   };
 
   const canProceedToNextStep = () => {
