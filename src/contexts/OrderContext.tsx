@@ -80,14 +80,27 @@ export const OrderProvider: React.FC<{ children: ReactNode }> = ({ children }) =
   const [state, dispatch] = useReducer(orderReducer, initialState);
 
   const getTotalPrice = () => {
-    if (!state.selectedProduct) return 0;
+    if (!state.selectedProduct || !state.selectedProduct.price) {
+      console.log('No product selected or price missing');
+      return 0;
+    }
     
-    const basePrice = state.selectedProduct.price || 0;
-    const designPrice = state.selectedDesign ? state.selectedDesign.price : 0;
+    const basePrice = Number(state.selectedProduct.price) || 0;
+    const designPrice = state.selectedDesign ? (Number(state.selectedDesign.price) || 0) : 0;
+    const quantity = Number(state.quantity) || 1;
+    
     const totalPerItem = basePrice + designPrice;
-    const total = totalPerItem * state.quantity;
+    const total = totalPerItem * quantity;
     
-    return Math.round(total * 100) / 100;
+    console.log('Price calculation:', {
+      basePrice,
+      designPrice,
+      quantity,
+      totalPerItem,
+      total
+    });
+    
+    return Number(total.toFixed(2));
   };
 
   const canProceedToNextStep = () => {
