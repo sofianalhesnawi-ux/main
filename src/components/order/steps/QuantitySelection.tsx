@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Minus, Plus, ArrowRight } from 'lucide-react';
 import { useOrder } from '../../../contexts/OrderContext';
 
 const QuantitySelection: React.FC = () => {
   const { state, dispatch, nextStep, prevStep, getTotalPrice } = useOrder();
+
+  // Force re-calculation when component mounts or state changes
+  useEffect(() => {
+    console.log('QuantitySelection mounted/updated');
+    console.log('Current total:', getTotalPrice());
+  }, [state.selectedProduct, state.selectedDesign, state.quantity]);
 
   const handleQuantityChange = (newQuantity: number) => {
     if (newQuantity >= 1 && newQuantity <= 10) {
@@ -17,6 +23,14 @@ const QuantitySelection: React.FC = () => {
       nextStep();
     }
   };
+
+  // Calculate values for display
+  const basePrice = state.selectedProduct ? parseFloat(String(state.selectedProduct.price)) || 0 : 0;
+  const designPrice = state.selectedDesign ? parseFloat(String(state.selectedDesign.price)) || 0 : 0;
+  const quantity = parseInt(String(state.quantity)) || 1;
+  const totalPrice = getTotalPrice();
+
+  console.log('Rendering QuantitySelection with:', { basePrice, designPrice, quantity, totalPrice });
 
   return (
     <div className="text-center">
@@ -41,7 +55,7 @@ const QuantitySelection: React.FC = () => {
           animate={{ scale: 1 }}
           className="w-20 h-20 rounded-2xl bg-[var(--accent-color)] flex items-center justify-center"
         >
-          <span className="text-3xl font-bold text-black">{state.quantity}</span>
+          <span className="text-3xl font-bold text-black">{quantity}</span>
         </motion.div>
 
         <motion.button
@@ -59,22 +73,22 @@ const QuantitySelection: React.FC = () => {
       <div className="glass-card rounded-2xl p-6 mb-8">
         <div className="space-y-3 text-right">
           <div className="flex justify-between items-center">
-            <span className="text-white">{Number(state.selectedProduct?.price || 0)} دينار ليبي</span>
+            <span className="text-white font-bold">{basePrice.toFixed(2)} دينار ليبي</span>
             <span className="text-[var(--text-light)]">سعر القطعة</span>
           </div>
-          {state.selectedDesign && state.selectedDesign.price > 0 && (
+          {designPrice > 0 && (
             <div className="flex justify-between items-center">
-              <span className="text-white">+{Number(state.selectedDesign.price)} دينار ليبي</span>
+              <span className="text-white font-bold">+{designPrice.toFixed(2)} دينار ليبي</span>
               <span className="text-[var(--text-light)]">إضافة التصميم</span>
             </div>
           )}
           <div className="flex justify-between items-center">
-            <span className="text-white">{Number(state.quantity)}</span>
+            <span className="text-white font-bold">{quantity}</span>
             <span className="text-[var(--text-light)]">الكمية</span>
           </div>
           <hr className="border-white/20" />
           <div className="flex justify-between items-center text-lg font-bold">
-            <span className="text-[var(--accent-color)]">{Number(getTotalPrice()).toFixed(2)} دينار ليبي</span>
+            <span className="text-[var(--accent-color)] text-xl">{totalPrice.toFixed(2)} دينار ليبي</span>
             <span className="text-white">المجموع</span>
           </div>
         </div>

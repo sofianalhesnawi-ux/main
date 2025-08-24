@@ -29,6 +29,8 @@ const OrderConfirmation: React.FC<OrderConfirmationProps> = ({ onClose }) => {
 
     try {
       const orderNumber = generateOrderNumber();
+      const totalAmount = getTotalPrice();
+      console.log('Order total amount:', totalAmount);
 
       if (!isSupabaseConfigured) {
         // Demo fallback: simulate API latency and success when Supabase is not configured
@@ -48,7 +50,7 @@ const OrderConfirmation: React.FC<OrderConfirmationProps> = ({ onClose }) => {
           customer_phone: state.customer.phone,
           customer_address: state.customer.address,
           customer_notes: state.customer.notes || null,
-          total_amount: getTotalPrice(),
+          total_amount: totalAmount,
           status: 'pending',
         })
         .select()
@@ -171,7 +173,7 @@ const OrderConfirmation: React.FC<OrderConfirmationProps> = ({ onClose }) => {
           <hr className="border-white/20" />
           
           <div className="flex justify-between items-center text-lg font-bold">
-            <span className="text-[var(--accent-color)]">{Number(getTotalPrice()).toFixed(2)} دينار ليبي</span>
+            <span className="text-[var(--accent-color)] text-xl">{getTotalPrice().toFixed(2)} دينار ليبي</span>
             <span className="text-white">المجموع</span>
           </div>
         </div>

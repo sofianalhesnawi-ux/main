@@ -80,30 +80,41 @@ export const OrderProvider: React.FC<{ children: ReactNode }> = ({ children }) =
   const [state, dispatch] = useReducer(orderReducer, initialState);
 
   const getTotalPrice = () => {
+    console.log('=== CALCULATING TOTAL PRICE ===');
+    console.log('Current state:', state);
+    
     if (!state.selectedProduct) {
-      console.log('No product selected');
+      console.log('❌ No product selected');
       return 0;
     }
     
-    // Convert price to number to ensure proper calculation
-    const basePrice = Number(state.selectedProduct.price) || 0;
-    console.log('Base price from product:', basePrice);
+    console.log('✅ Product selected:', state.selectedProduct.name);
+    console.log('Product price (raw):', state.selectedProduct.price);
+    console.log('Product price type:', typeof state.selectedProduct.price);
     
-    // Convert design price to number
-    const designPrice = Number(state.selectedDesign?.price) || 0;
-    console.log('Design price:', designPrice);
+    // Force conversion to number
+    const basePrice = parseFloat(String(state.selectedProduct.price)) || 0;
+    console.log('Base price (converted):', basePrice);
     
-    // Ensure quantity is a number
-    const quantity = Number(state.quantity) || 1;
+    let designPrice = 0;
+    if (state.selectedDesign) {
+      console.log('Design selected:', state.selectedDesign.name);
+      console.log('Design price (raw):', state.selectedDesign.price);
+      designPrice = parseFloat(String(state.selectedDesign.price)) || 0;
+      console.log('Design price (converted):', designPrice);
+    }
+    
+    const quantity = parseInt(String(state.quantity)) || 1;
     console.log('Quantity:', quantity);
     
-    // احسب المجموع
     const totalPerItem = basePrice + designPrice;
-    const total = totalPerItem * quantity;
+    const finalTotal = totalPerItem * quantity;
     
-    console.log('Final calculation:', { basePrice, designPrice, quantity, totalPerItem, total });
+    console.log('Calculation:');
+    console.log(`(${basePrice} + ${designPrice}) × ${quantity} = ${finalTotal}`);
+    console.log('=== END CALCULATION ===');
     
-    return Number(total.toFixed(2)); // Ensure result is a number with 2 decimal places
+    return finalTotal;
   };
 
   const canProceedToNextStep = () => {
