@@ -85,16 +85,16 @@ export const OrderProvider: React.FC<{ children: ReactNode }> = ({ children }) =
       return 0;
     }
     
-    // تأكد من أن السعر الأساسي موجود
-    const basePrice = state.selectedProduct.price || 0;
+    // Convert price to number to ensure proper calculation
+    const basePrice = Number(state.selectedProduct.price) || 0;
     console.log('Base price from product:', basePrice);
     
-    // احسب سعر التصميم
-    const designPrice = state.selectedDesign?.price || 0;
+    // Convert design price to number
+    const designPrice = Number(state.selectedDesign?.price) || 0;
     console.log('Design price:', designPrice);
     
-    // احسب الكمية
-    const quantity = state.quantity || 1;
+    // Ensure quantity is a number
+    const quantity = Number(state.quantity) || 1;
     console.log('Quantity:', quantity);
     
     // احسب المجموع
@@ -103,7 +103,7 @@ export const OrderProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     
     console.log('Final calculation:', { basePrice, designPrice, quantity, totalPerItem, total });
     
-    return Math.round(total * 100) / 100; // تقريب إلى منزلتين عشريتين
+    return Number(total.toFixed(2)); // Ensure result is a number with 2 decimal places
   };
 
   const canProceedToNextStep = () => {

@@ -59,22 +59,22 @@ const QuantitySelection: React.FC = () => {
       <div className="glass-card rounded-2xl p-6 mb-8">
         <div className="space-y-3 text-right">
           <div className="flex justify-between items-center">
-            <span className="text-white">{state.selectedProduct?.price} دينار ليبي</span>
+            <span className="text-white">{Number(state.selectedProduct?.price || 0)} دينار ليبي</span>
             <span className="text-[var(--text-light)]">سعر القطعة</span>
           </div>
           {state.selectedDesign && state.selectedDesign.price > 0 && (
             <div className="flex justify-between items-center">
-              <span className="text-white">+{state.selectedDesign.price} دينار ليبي</span>
+              <span className="text-white">+{Number(state.selectedDesign.price)} دينار ليبي</span>
               <span className="text-[var(--text-light)]">إضافة التصميم</span>
             </div>
           )}
           <div className="flex justify-between items-center">
-            <span className="text-white">{state.quantity}</span>
+            <span className="text-white">{Number(state.quantity)}</span>
             <span className="text-[var(--text-light)]">الكمية</span>
           </div>
           <hr className="border-white/20" />
           <div className="flex justify-between items-center text-lg font-bold">
-            <span className="text-[var(--accent-color)]">{getTotalPrice()} دينار ليبي</span>
+            <span className="text-[var(--accent-color)]">{Number(getTotalPrice()).toFixed(2)} دينار ليبي</span>
             <span className="text-white">المجموع</span>
           </div>
         </div>

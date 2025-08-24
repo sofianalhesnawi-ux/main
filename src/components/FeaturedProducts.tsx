@@ -29,7 +29,7 @@ const ProductCard: React.FC<{ product: typeof products[0]; onOrderClick: (produc
               {product.name}
             </h3>
             <p className="text-lg text-white font-semibold text-shadow group-hover:scale-110 transition-transform duration-300">
-              {product.price} دينار ليبي
+              {Number(product.price)} دينار ليبي
             </p>
             <motion.button
               whileHover={{ scale: 1.05 }}
